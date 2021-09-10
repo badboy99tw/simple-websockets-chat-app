@@ -7,6 +7,10 @@ const ddb = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10', region: 
 
 const { TABLE_NAME } = process.env;
 
+const sleep = (ms=0) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 exports.handler = async event => {
   let connectionData;
   
@@ -21,10 +25,17 @@ exports.handler = async event => {
     endpoint: event.requestContext.domainName + '/' + event.requestContext.stage
   });
   
-  const postData = JSON.parse(event.body).data;
+  const eventBody = JSON.parse(event.body);
+  const postData = eventBody.data;
+  const delay = eventBody.delay;
   
   const postCalls = connectionData.Items.map(async ({ connectionId }) => {
     try {
+      console.log(postData, delay);
+      for (let i=delay; i > 0; i--) {
+        await apigwManagementApi.postToConnection({ ConnectionId: connectionId, Data: `${i}` }).promise();
+        await sleep(1000);
+      }
       await apigwManagementApi.postToConnection({ ConnectionId: connectionId, Data: postData }).promise();
     } catch (e) {
       if (e.statusCode === 410) {

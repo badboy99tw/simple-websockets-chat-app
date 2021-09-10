@@ -79,6 +79,7 @@ Resources:
     Properties:
       ApiId: !Ref SimpleChatWebSocket
       Description: Send Integration
+      TimeoutInMillis: 29000
       IntegrationType: AWS_PROXY
       IntegrationUri: 
         Fn::Sub:
@@ -162,6 +163,7 @@ Resources:
       Handler: app.handler
       MemorySize: 256
       Runtime: nodejs12.x
+      Timeout: 60
       Environment:
         Variables:
           TABLE_NAME: !Ref TableName
