@@ -54,7 +54,16 @@ connected (press CTRL+C to quit)
 < 3
 < 2
 < 1
-< hello world
+< {"connectionId":"Fch8feyCNjMCIQA=","postData":"hello world"}
+```
+5. Now you can send messages from another session with returned connection id (in this example is `Fch8feyCNjMCIQA=`) by the followed commands
+``` bash
+$ npm install
+$ npm run send -- -r {YOUR-REGION} -w {YOUR-API-ID}.execute-api.{YOUR-REGION}.amazonaws.com/{STAGE} -i Fch8feyCNjMCIQA= -m "hi"
+```
+Then you will receive this message in the original WebSocket connection
+```
+< hi
 ```
 
 ## License Summary

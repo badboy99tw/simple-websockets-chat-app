@@ -1,0 +1,13 @@
+{
+  "name": "simple-websockets-chat-app",
+  "version": "1.0.0",
+  "dependencies": {
+    "aws-sdk": "^2.739.0",
+    "wscat": "^5.0.0",
+    "yargs": "^17.1.1"
+  },
+  "scripts": {
+    "send": "./bin/send.js"
+  },
+  "license": "MIT"
+}
