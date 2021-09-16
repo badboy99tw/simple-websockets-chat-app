@@ -62,7 +62,7 @@ $ npm install
 $ npm run send -- -r {YOUR-REGION} -w {YOUR-API-ID}.execute-api.{YOUR-REGION}.amazonaws.com/{STAGE} -i Fch8feyCNjMCIQA= -m "hi"
 ```
 Then you will receive this message in the original WebSocket connection
-```
+``` bash
 < hi
 ```
 
