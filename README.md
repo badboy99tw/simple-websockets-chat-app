@@ -48,7 +48,7 @@ $ wscat -c wss://{YOUR-API-ID}.execute-api.{YOUR-REGION}.amazonaws.com/{STAGE}
 ```
 4. To test the sendMessage function, send a JSON message like the following example. The Lambda function sends it back using the callback URL: 
 ``` bash
-$ wscat -c wss://{YOUR-API-ID}.execute-api.{YOUR-REGION}.amazonaws.com/prod
+$ wscat -c wss://{YOUR-API-ID}.execute-api.{YOUR-REGION}.amazonaws.com/prod -H "Auth: Bearer ValidToken"
 connected (press CTRL+C to quit)
 > {"action":"sendmessage", "data":"hello world", "delay": 3}
 < 3

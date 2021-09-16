@@ -1,0 +1,12 @@
+{
+  "name": "authorizer",
+  "version": "1.0.0",
+  "description": "authorizer example for WebSockets on API Gateway",
+  "main": "src/app.js",
+  "author": "Chinkhun Lim <hi@badboy99.tw>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "aws-sdk": "^2.739.0"
+  }
+}

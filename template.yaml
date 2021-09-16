@@ -28,7 +28,8 @@ Resources:
     Properties:
       ApiId: !Ref SimpleChatWebSocket
       RouteKey: $connect
-      AuthorizationType: NONE
+      AuthorizationType: CUSTOM
+      AuthorizerId: !Ref Authorizer
       OperationName: ConnectRoute
       Target: !Join
         - '/'
@@ -183,6 +184,29 @@ Resources:
     Properties:
       Action: lambda:InvokeFunction
       FunctionName: !Ref SendMessageFunction
+      Principal: apigateway.amazonaws.com
+  Authorizer:
+    Type: 'AWS::ApiGatewayV2::Authorizer'
+    Properties:
+      Name: LambdaAuthorizer
+      ApiId: !Ref SimpleChatWebSocket
+      AuthorizerType: REQUEST
+      AuthorizerUri:
+        Fn::Sub:
+            arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AuthorizerFunction.Arn}/invocations
+  AuthorizerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: authorizer/
+      Handler: app.handler
+      Runtime: nodejs12.x
+  AuthorizerPermission:
+    Type: AWS::Lambda::Permission
+    DependsOn:
+      - SimpleChatWebSocket
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref AuthorizerFunction
       Principal: apigateway.amazonaws.com
 
 Outputs:
