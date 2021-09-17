@@ -44,11 +44,11 @@ $ npm install -g wscat
 ```
 3. On the console, connect to your published API endpoint by executing the following command:
 ``` bash
-$ wscat -c wss://{YOUR-API-ID}.execute-api.{YOUR-REGION}.amazonaws.com/{STAGE}
+$ wscat -c wss://{YOUR-API-ID}.execute-api.{YOUR-REGION}.amazonaws.com/{STAGE} -H "Auth: Bearer ValidToken"
 ```
 4. To test the sendMessage function, send a JSON message like the following example. The Lambda function sends it back using the callback URL: 
 ``` bash
-$ wscat -c wss://{YOUR-API-ID}.execute-api.{YOUR-REGION}.amazonaws.com/prod -H "Auth: Bearer ValidToken"
+$ wscat -c wss://{YOUR-API-ID}.execute-api.{YOUR-REGION}.amazonaws.com/{STAGE} -H "Auth: Bearer ValidToken"
 connected (press CTRL+C to quit)
 > {"action":"sendmessage", "data":"hello world", "delay": 3}
 < 3
